@@ -15,7 +15,8 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http	    
         .authorizeRequests()
-        .antMatchers("/admin/**").hasRole("ADMIN")
+        .antMatchers("/avengers/assemble").hasRole("AVENGER")
+        .antMatchers("/secret-bases").hasRole("DIRECTOR")
         .antMatchers("/").permitAll()
         .anyRequest().authenticated()
         .and()
@@ -32,13 +33,18 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 //	    auth.inMemoryAuthentication().withUser("user").password(encoder.encode("password")).roles("");
 
 		auth.inMemoryAuthentication()
-			.withUser("user")
-			.password(encoder.encode("password"))
+			.withUser("Steve Guy")
+			.password(encoder.encode("none"))
 			.roles("")
 			.and()
-			.withUser("admin")
-			.password(encoder.encode("12345678"))
-			.roles("ADMIN");
+			.withUser("Tony Stark")
+			.password(encoder.encode("IronMan"))
+			.roles("AVENGER")
+			.and()
+			.withUser("Nick Fury")
+			.password(encoder.encode("oneEyed"))
+			.roles("DIRECTOR", "AVENGER")
+			;
 
 	}
 
